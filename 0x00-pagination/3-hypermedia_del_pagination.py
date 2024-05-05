@@ -72,7 +72,8 @@ class Server:
 
         # Loop through the indices of the page
         for i in range(index, index + page_size):
-            # If the index is in the dataset, append the data and update the next index
+            # If the index is in the dataset,
+            # append the data and update the next index
             if i in self.__indexed_dataset:
                 data.append(self.__indexed_dataset[i])
                 next_index = i
