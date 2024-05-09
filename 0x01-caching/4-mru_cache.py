@@ -3,7 +3,6 @@
 BaseCaching = __import__("base_caching").BaseCaching
 
 
-<<<<<<<<<<<<<<  ✨ Codeium Command 🌟 >>>>>>>>>>>>>>>>
 class MRUCache(BaseCaching):
     """
     Implements a MRU (Most Recently Used) cache.
@@ -21,19 +20,14 @@ class MRUCache(BaseCaching):
         Adds an item to the cache. If the cache is full, the least
         recently used item is discarded.
         """
-        if key is None or item is None:
-            return
-
-        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            # Remove the least recently used item
-            removed = self.order.pop(0)
-            del self.cache_data[removed]
-            print("DISCARD: {}".format(removed))
-
-        self.cache_data[key] = item
-        # Add the new item at the end of the order list
-        if key not in self.order:
-            self.order.append(key)
+        if key and item:
+            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                # Remove the least recently used item
+                removed = self.order.pop(0)
+                self.cache_data.pop(removed)
+                print("DISCARD: {}".format(removed))
+            self.cache_data[key] = item
+            self.order.append(key)  # Add the new item at the end
 
     def get(self, key):
         """
@@ -44,5 +38,4 @@ class MRUCache(BaseCaching):
         if key in self.cache_data:
             self.order.remove(key)
             self.order.append(key)
-+            return self.cache_data[key]
-<<<<<<<  77f43854-8eb6-4baf-b237-3fe77a871cb1  >>>>>>>
+            return self.cache_data.get(key)
