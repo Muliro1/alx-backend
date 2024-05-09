@@ -3,8 +3,6 @@
 BaseCaching = __import__("base_caching").BaseCaching
 
 
-
-
 class MRUCache(BaseCaching):
     """
     Implements a MRU (Most Recently Used) cache.
