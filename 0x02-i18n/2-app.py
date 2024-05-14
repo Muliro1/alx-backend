@@ -36,6 +36,7 @@ app.config.from_object(Config)
 # defined earlier.
 
 babel = Babel(app)
+
 # You're creating an instance of the Babel class and passing your Flask
 # application to it.
 
