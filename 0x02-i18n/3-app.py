@@ -38,5 +38,6 @@ def get_locale() -> str:
     Function Docstring
     Function to determine the best match for supported languages.
     """
-    # Returning the best language match from the accepted languages in the request
+    # Returning the best language match from the accepted languages in the
+    # request
     return request.accept_languages.best_match(app.config["LANGUAGES"])
