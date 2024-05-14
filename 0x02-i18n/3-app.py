@@ -1,33 +1,42 @@
 #!/usr/bin/env python3
-""" doc doc doc """
+"""
+Module Docstring
+A module level docstring.
+"""
+
+# Importing necessary modules from flask and flask_babel
 from flask import Flask, render_template, request
 from flask_babel import Babel
 
 
 class Config(object):
-    """doc doc doc"""
-
+    """
+    Class Docstring
+    A class for configuration settings.
+    """
+    # Supported languages
     LANGUAGES = ["en", "fr"]
+
+    # Default locale and timezone
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
+# Creating an instance of Flask class
 app = Flask(__name__)
+
+# Configuring the Flask application
 app.config.from_object(Config)
+
+# Creating an instance of Babel class
 babel = Babel(app)
 
 
 @babel.localeselector
 def get_locale() -> str:
-    """doc doc doc"""
+    """
+    Function Docstring
+    Function to determine the best match for supported languages.
+    """
+    # Returning the best language match from the accepted languages in the request
     return request.accept_languages.best_match(app.config["LANGUAGES"])
-
-
-@app.route("/")
-def index() -> str:
-    """doc doc doc"""
-    return render_template("3-index.html")
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000")
