@@ -10,9 +10,19 @@ redisClient.on('connect', () => {
   console.log('Redis client connected to the server');
 });
 
+/**
+ * Publishes a message to the 'holberton school channel' in Redis after a specified delay.
+ *
+ * @param {string} message - The message to be published.
+ * @param {number} time - The delay in milliseconds before publishing the message.
+ */
 function publishMessage(message, time) {
+  // Wrap the publish operation in a setTimeout to introduce a delay
   setTimeout(() => {
+    // Log a message indicating that the message is about to be sent
     console.log(`About to send ${message}`);
+    
+    // Publish the message to the 'holberton school channel' in Redis
     redisClient.publish('holberton school channel', message);
   }, time);
 }

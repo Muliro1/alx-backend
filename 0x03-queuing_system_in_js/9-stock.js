@@ -21,11 +21,18 @@ const listProducts = [{
 ];
 
 /**
- * Searches for product in listProducts based on id parameter
- * @param {number} id - product's id
- * @returns {object} - product object if found, otherwise undefined
+ * Returns the product object from the listProducts array that matches the given id.
+ *
+ * @param {number} id - The id of the product to search for.
+ * @returns {object | undefined} - The product object if found, otherwise undefined.
  */
 function getItemById(id) {
+  /**
+   * Iterates over the listProducts array and returns the product object that has the given id.
+   *
+   * @param {object} product - The product object to check.
+   * @returns {object | undefined} - The product object if it has the given id, otherwise undefined.
+   */
   return listProducts.find((product) => product.id === id);
 }
 
@@ -43,15 +50,23 @@ function reserveStockById(itemId, stock) {
   client.set(`item.${itemId}`, stock);
 }
 
+
 /**
- * Gets stock value associated with given item id (as key)
- * in Redis
- * @param {string} itemId - product's id
- * @returns {(string | null)} - current stock of products
+ * Asynchronously retrieves the current stock value associated with a given item ID.
+ *
+ * @param {string} itemId - The ID of the item to retrieve the stock value for.
+ * @return {Promise<string | null>} A promise that resolves to the current stock value
+ * as a string, or null if the item does not exist in Redis.
  */
 async function getCurrentReservedStockById(itemId) {
+  // Use the promisify utility function to convert the client's get method to a promise-based
+  // function that can be awaited.
   const getAsync = promisify(client.get).bind(client);
+
+  // Retrieve the value associated with the item ID from Redis.
   const value = await getAsync(`item.${itemId}`);
+
+  // Return the retrieved value, which may be null if the item does not exist in Redis.
   return value;
 }
 

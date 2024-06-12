@@ -19,12 +19,16 @@ function setNewSchool(schoolName, value) {
 }
 
 /**
- * Gets and display the value associated with given key
- * in redis store.
- * @param {string} schoolName - key to search in redis
+ * This function retrieves the value associated with a given key from the Redis store
+ * and logs it to the console if it exists.
+ *
+ * @param {string} schoolName - The key to search for in the Redis store.
+ * @return {void} This function does not return anything.
  */
 function displaySchoolValue(schoolName) {
+  // Get the value associated with the given key from the Redis store
   redisClient.get(schoolName, (_error, value) => {
+    // If the value exists, log it to the console
     if (value) console.log(value);
   });
 }
